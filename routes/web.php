@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExampleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,17 +18,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('about', function () {
-     return ('about');
- });
+//Route::get('login', function () {
+ //  return view('login');
+//});
 
- Route::get('contact us', function () {
-    return ('contact us');
-});
+//Route::post('logged', function () {
+ //  return 'you are logged in';
+//})->name('logged');
 
-Route::get('/blog/{category}', function ($cat) {
-     return ('the Blog is:' . $cat);
- })->whereIn('category',['science','sports','math','medical']);
+Route::get('controll',[ExampleController::class,'sh']);
+Route::post('control',[ExampleController::class,'show']
+)->name('logged');
+
+
+//Route::get('about', function () {
+  //   return ('about');
+ //});
+
+ //Route::get('contact us', function () {
+ //   return ('contact us');
+//});
+
+//Route::get('/blog/{category}', function ($cat) {
+   //  return ('the Blog is:' . $cat);
+ //})->whereIn('category',['science','sports','math','medical']);
 
 //Route::get('food', function () {
    // return view('food');
