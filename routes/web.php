@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\CarController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+
 //Route::get('login', function () {
  //  return view('login');
 //});
@@ -26,9 +31,10 @@ Route::get('/', function () {
  //  return 'you are logged in';
 //})->name('logged');
 
-Route::get('controll',[ExampleController::class,'sh']);
-Route::post('control',[ExampleController::class,'show']
-)->name('logged');
+//Route::get('controll',[ExampleController::class,'sh']);
+//Route::post('control',[ExampleController::class,'show']
+//)->name('logged');
+
 
 
 //Route::get('about', function () {
@@ -84,3 +90,9 @@ Route::post('control',[ExampleController::class,'show']
    // return ('the name is:' . $cat);
 //})->whereIn('category',['pc','Lab']);
 //});
+
+//routes for car table
+Route::get('createCar',[CarController::class,'create']);
+Route::get('cars',[CarController::class,'index']);
+Route::get('posts',[CarController::class,'index']);
+Route::post('storeCar',[CarController::class,'store'])->name('storeCar');
