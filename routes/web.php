@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\PostController;
 
 
 /*
@@ -91,8 +92,26 @@ Route::get('/', function () {
 //})->whereIn('category',['pc','Lab']);
 //});
 
+//routes for post table
+Route::get('createPost',[PostController::class,'create'])->name('createPost');
+Route::post('storePost',[PostController::class,'store'])->name('storePost');
+Route::get("showPost/{id}", [PostController::class,"show"])->name('showPost');
+Route::get('updatePost/{id}',[PostController::class,'edit']);
+Route::get('deletePost/{id}',[PostController::class,'destroy']);
+Route::get("trashedPost", [PostController::class,"trashed"])->name('trashedPost');
+Route::get("restorePost/{id}", [PostController::class,"restore"])->name('restorePost');
+Route::get('forceDeletePost', [PostController::class,'forceDelete'])->name('forceDeletePost');
+Route::get('posts',[PostController::class,'index'])->name('posts');
+Route::put('updatee/{id}',[PostController::class,'update'])->name('Update');
+Route::get("showPost/{id}",[CarController::class,'show'])->name('showPost');
 //routes for car table
-Route::get('createCar',[CarController::class,'create']);
-Route::get('cars',[CarController::class,'index']);
-Route::get('posts',[CarController::class,'index']);
+Route::get('createCar',[CarController::class,'create'])->name('createCar');
+Route::get('cars',[CarController::class,'index'])->name('cars');
+Route::get('updateCar/{id}',[CarController::class,'edit']);
+Route::get('deleteCar/{id}',[CarController::class,'destroy']);
+Route::get('trashed', [CarController::class,'trashed'])->name('trashed');
+Route::get('forceDelete', [CarController::class,'forceDelete'])->name('forceDelete');
+Route::get('restoreCar/{id}', [CarController::class,'restore'])->name('restoreCar');
+Route::put('update/{id}',[CarController::class,'update'])->name('update');
 Route::post('storeCar',[CarController::class,'store'])->name('storeCar');
+Route::get("showCar/{id}",[CarController::class,'show'])->name('showCar');

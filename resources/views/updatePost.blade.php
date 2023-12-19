@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>ADD CAR</title>
+  <title>UPDATE Post</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -9,27 +9,27 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-@include('includes.nav')
+@include('includes.navv')
 <div class="container">
-  <h2>ADD NEW CAR DATA</h2>
-  <form action="{{ route('storeCar') }}" method="post">
+  <h2>UPDATE NEW POST DATA</h2>
+  <form action="{{ route('Update',$post->id) }}" method="post">
     @csrf
+    @method('put')
     <div class="form-group">
       <label for="title">Title:</label>
-      <input type="title" class="form-control" id="title" placeholder="Enter title" name="title" value="{{ old('title') }}"> 
-      @error('title')
-       {{ $message }}
-        @enderror
+      <input type="title" class="form-control" id="title" placeholder="Enter title" name="postTitle" value="{{ $post->postTitle}}">
+    </div>
+
+    <div class="form-group">
+      <label for="author">Author:</label>
+      <input type="author" class="form-control" id="title" placeholder="Enter title" name="author" value="{{ $post->author}}">
     </div>
     <div class="form-group">
       <label for="Description">Description:</label>
-      <textarea class="form-control" name="description" id="Description" cols="60" rows="3" >{{ old('description') }}</textarea>
-      @error('description')
-       {{ $message }}
-        @enderror
+      <textarea class="form-control" name="description" id="Description" cols="60" rows="3" >{{ $post->description}}</textarea>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="published"> Published me</label>
+      <label><input type="checkbox" name="published" @checked($post->published) > Published me</label>
     </div>
     <button type="submit" class="btn btn-default">Insert</button>
   </form>

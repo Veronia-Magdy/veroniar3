@@ -18,6 +18,9 @@
         <th>Title</th>
         <th>Description</th>
         <th>Published</th>
+        <th>Update</th>
+        <th>Show</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -33,6 +36,9 @@
             no
             @endif
         </td>
+        <td><a href="updateCar/{{ $car->id }}">Edit</a></td>
+        <td><a href="showCar/{{ $car->id }}">Show</a></td>
+        <td><a href="deleteCar/{{ $car->id }}" onclick="return confirm('Are you sure to confirm to delete?')">Delete</a></td>
       </tr>
       @endforeach
 </tbody>

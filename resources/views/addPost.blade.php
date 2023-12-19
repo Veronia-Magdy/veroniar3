@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>ADD CAR</title>
+  <title>ADD Post</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -9,15 +9,23 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-@include('includes.nav')
+@include('includes.navv')
 <div class="container">
-  <h2>ADD NEW CAR DATA</h2>
-  <form action="{{ route('storeCar') }}" method="post">
+  <h2>ADD NEW POST DATA</h2>
+  <form action="{{ route('storePost') }}" method="post">
     @csrf
     <div class="form-group">
       <label for="title">Title:</label>
-      <input type="title" class="form-control" id="title" placeholder="Enter title" name="title" value="{{ old('title') }}"> 
-      @error('title')
+      <input type="title" class="form-control" id="title" placeholder="Enter title" name="postTitle" value="{{ old('postTitle') }}"> 
+      @error('postTitle')
+       {{ $message }}
+        @enderror
+    </div>
+
+    <div class="form-group">
+      <label for="author">Author:</label>
+      <input type="author" class="form-control" id="title" placeholder="Enter title" name="author" value="{{ old('author') }}"> 
+      @error('author')
        {{ $message }}
         @enderror
     </div>

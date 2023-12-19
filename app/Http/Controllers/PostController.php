@@ -3,22 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Car;
+use App\Models\Post;
 
-
-class CarController extends Controller
+class PostController extends Controller
 {
-   // private $columns = ['title','description','published'];
+   private $columns = ['postTitle','description','author','published'];
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $cars = Car::get();
-        return view ('cars' , compact('cars'));
-       // $posts = Post::get();
-       // return view ('posts' , compact('posts'));
-
+        $posts = Post::get();
+        return view('posts' , compact('posts'));
     }
 
     /**
@@ -26,7 +22,7 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view ('addCar');
+        return view('addPost');
     }
 
     /**
@@ -34,25 +30,27 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //$cars = new Car();
-        //$cars->title = $request->title;
-        //$cars->description = $request->Description;
-        //if(isset($request->Published)){
-       // $cars->Published = 1;
-       //}else{
-        //$cars->Published = 0;
+       // $posts = new Post();
+       // $posts->postTitle = $request->postTitle;
+       // $posts->description = $request->description;
+       // $posts->author = $request->author;
+       // if(isset($request->published)){
+        //$posts->published = 1;
+      // }else{
+       // $posts->published = 0;
        //}
 
-        //$cars->save();
+        //$posts->save();
         //return "Data Added Successfully";
-        //$data = $request->only($this->columns);
+       // $data = $request->only($this->columns);
        $data= $request->validate([
-        'title' => 'required|string',
-        'description' => 'required|string'
+        'postTitle' => 'required|string',
+        'description' => 'required|string',
+        'author' => 'required|string'
         ]);
         $data["published"] = isset($request->published);
-        Car::create($data);
-        return redirect('cars');
+        Post::create($data);
+        return redirect('posts');
     }
 
     /**
@@ -60,8 +58,8 @@ class CarController extends Controller
      */
     public function show(string $id)
     {
-        $Car = Car::findOrFail($id);
-        return view('showCar', compact('Car'));
+        $Posts = Post::findOrFail($id);
+        return view('showPost', compact('Post'));
     }
 
     /**
@@ -69,9 +67,8 @@ class CarController extends Controller
      */
     public function edit(string $id)
     {
-        $car = Car::findOrFail($id);
-        return view('updateCar', compact('car'));
-
+        $post = Post::findOrFail($id);
+        return view('updatePost', compact('post'));
     }
 
     /**
@@ -81,8 +78,8 @@ class CarController extends Controller
     {
         $data = $request->only($this->columns);
         $data["published"] = isset($request->published);
-        Car::where('id',$id)->update($data);
-        return redirect('cars');
+        Post::where('id',$id)->update($data);
+        return redirect('posts');
     }
 
     /**
@@ -90,8 +87,8 @@ class CarController extends Controller
      */
     public function destroy(string $id)
     {
-        Car::where('id',$id)->delete();
-        return redirect('cars');
+        Post::where('id',$id)->delete();
+        return redirect('posts');
     }
 
     /**
@@ -99,25 +96,26 @@ class CarController extends Controller
      */
     public function trashed()
     {
-        $cars = Car::onlyTrashed()->get();
-        return view('trashed',compact('cars'));
+        $posts = Post::onlyTrashed()->get();
+        return view('trashedPost',compact('posts'));
     }
 
-     /**
+    /**
      * Remove the specified resource from storage.
      */
     public function forceDelete(string $id)
     {
-        Car::where('id',$id)->forceDelete();
-        return redirect('cars');
+        Post::where('id',$id)->forceDelete();
+        return redirect('posts');
     }
 
-     /**
+    /**
      * Remove the specified resource from storage.
      */
     public function restore(string $id)
     {
-        Car::where('id',$id)->restore();
-        return redirect('cars');
+        Post::where('id',$id)->restore();
+        return redirect('posts');
     }
+
 }
