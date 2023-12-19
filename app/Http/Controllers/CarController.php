@@ -8,7 +8,7 @@ use App\Models\Car;
 
 class CarController extends Controller
 {
-   // private $columns = ['title','description','published'];
+    private $columns = ['title','description','published'];
     /**
      * Display a listing of the resource.
      */
