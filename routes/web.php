@@ -92,6 +92,17 @@ Route::get('/', function () {
 //})->whereIn('category',['pc','Lab']);
 //});
 
+Route::get('test50', function () {
+      return view('test');
+  });
+
+  Route::get('image', function () {
+   return view('image');
+});
+
+Route::post('imageUplod',[ExampleController::class,'upload'])->name('imageUplod');
+
+ 
 //routes for post table
 Route::get('createPost',[PostController::class,'create'])->name('createPost');
 Route::post('storePost',[PostController::class,'store'])->name('storePost');

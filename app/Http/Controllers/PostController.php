@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Traits\Common;
 
 class PostController extends Controller
 {
+    use Common;
    private $columns = ['postTitle','description','author','published'];
     /**
      * Display a listing of the resource.
@@ -43,11 +45,16 @@ class PostController extends Controller
         //$posts->save();
         //return "Data Added Successfully";
        // $data = $request->only($this->columns);
+       $messages = $this->messages();
        $data= $request->validate([
         'postTitle' => 'required|string',
         'description' => 'required|string',
-        'author' => 'required|string'
-        ]);
+        'author' => 'required|string',
+        'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+        ],$messages);
+        $fileName= $this->uploadFile($request->image, 'assets/images');
+        $data["image"] = $fileName;
+        
         $data["published"] = isset($request->published);
         Post::create($data);
         return redirect('posts');
@@ -117,5 +124,15 @@ class PostController extends Controller
         Post::where('id',$id)->restore();
         return redirect('posts');
     }
+
+    public function messages(){
+        return [
+            'postTitle.required'=>'the title is required',
+            'postTitle.string'=>'Should be string',
+            'description.required'=> 'should be text',
+            'author.required'=> 'should be text',
+            'image.required'=> 'please sure to select your image',
+            ];
+        }    
 
 }

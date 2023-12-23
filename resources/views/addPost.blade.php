@@ -12,7 +12,7 @@
 @include('includes.navv')
 <div class="container">
   <h2>ADD NEW POST DATA</h2>
-  <form action="{{ route('storePost') }}" method="post">
+  <form action="{{ route('storePost') }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
       <label for="title">Title:</label>
@@ -33,6 +33,13 @@
       <label for="Description">Description:</label>
       <textarea class="form-control" name="description" id="Description" cols="60" rows="3" >{{ old('description') }}</textarea>
       @error('description')
+       {{ $message }}
+        @enderror
+    </div>
+    <div class="form-group">
+      <label for="image">Image:</label>
+      <input type="file" class="form-control" id="image" placeholder="Enter image" name="image"> 
+      @error('image')
        {{ $message }}
         @enderror
     </div>

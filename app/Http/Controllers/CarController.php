@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
+use App\Traits\Common;
 
 
 class CarController extends Controller
 {
+    use Common;
     private $columns = ['title','description','published'];
     /**
      * Display a listing of the resource.
@@ -46,10 +48,15 @@ class CarController extends Controller
         //$cars->save();
         //return "Data Added Successfully";
         //$data = $request->only($this->columns);
+       $messages = $this->messages();
        $data= $request->validate([
         'title' => 'required|string',
-        'description' => 'required|string'
-        ]);
+        'description' => 'required|string',
+        'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+        ], $messages);
+        $fileName= $this->uploadFile($request->image, 'assets/images');
+        $data["image"] = $fileName; 
+        
         $data["published"] = isset($request->published);
         Car::create($data);
         return redirect('cars');
@@ -79,11 +86,39 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = $request->only($this->columns);
-        $data["published"] = isset($request->published);
-        Car::where('id',$id)->update($data);
-        return redirect('cars');
+        
+        $cars = new Car();
+        $cars->title = $request->title;
+        $cars->description = $request->Description;
+        if(isset($request->Published)){
+       $cars->Published = 1;
+       }else{
+        $cars->Published = 0;
+       }
+
+       if($request->hash_file('image'))
+       {
+        $destenation= 'assets/images'. $cars->image;
+        if(File::exists($destenation))
+        {
+            File::delete($destenation);
+        }
+        $file= $request->file('image');
+        $extention= $file->getClientOriginalExtention();
+        $fileName = time().'.' .$extention;
+        $file->move('assets/images', $fileName);
+        $cars->image = $fileName;
     }
+
+       $cars->update();
+       return redirect('cars')->back()->with('image updated successfully');
+
+    }
+        //$data = $request->only($this->columns);
+        //$data["published"] = isset($request->published);
+        //Car::where('id',$id)->update($data);
+        //return redirect('cars');
+    //}
 
     /**
      * Remove the specified resource from storage.
@@ -120,4 +155,13 @@ class CarController extends Controller
         Car::where('id',$id)->restore();
         return redirect('cars');
     }
+
+    public function messages(){
+    return [
+        'title.required'=>'the title is required',
+        'title.string'=>'Should be string',
+        'description.required'=> 'should be text',
+        'image.required'=> 'please sure to select your image',
+        ];
+    }    
 }
