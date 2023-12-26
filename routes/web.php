@@ -102,6 +102,10 @@ Route::get('test50', function () {
 
 Route::post('imageUplod',[ExampleController::class,'upload'])->name('imageUplod');
 
+Route::get('testHome', function () {
+   return view('testHome');
+});
+
  
 //routes for post table
 Route::get('createPost',[PostController::class,'create'])->name('createPost');

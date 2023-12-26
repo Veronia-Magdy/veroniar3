@@ -36,7 +36,6 @@
             no
             @endif
         </td>
-       <td><img src="{{ asset('assets/images'.$car->image) }}" alt="car" style="width: 200px;"></td>
         <td><a href="updateCar/{{ $car->id }}">Edit</a></td>
         <td><a href="showCar/{{ $car->id }}">Show</a></td>
         <td><a href="deleteCar/{{ $car->id }}" onclick="return confirm('Are you sure to confirm to delete?')">Delete</a></td>
