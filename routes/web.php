@@ -106,7 +106,14 @@ Route::get('testHome', function () {
    return view('testHome');
 });
 
+Route::get('404', function () {
+   return view('404');
+});
  
+Route::get('contact', function () {
+   return view('contact');
+});
+
 //routes for post table
 Route::get('createPost',[PostController::class,'create'])->name('createPost');
 Route::post('storePost',[PostController::class,'store'])->name('storePost');
