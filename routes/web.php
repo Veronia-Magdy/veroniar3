@@ -59,8 +59,8 @@ Route::get('/', function () {
 //});
 
 //Route::prefix('lar')->group(function(){ 
-   // Route::get('/', function (){
-   // return view ('test');
+  //  Route::get('/', function (){
+  //  return view ('test');
 //});
 
 //Route::get('test', function () {
@@ -76,58 +76,57 @@ Route::get('/', function () {
 //})->where(['id'=> '[0-9]+']);
 
 //Route::get('/test3/{id?}', function ($id=0) {
-    //return ('the id is:' . $id);
+   // return ('the id is:' . $id);
 //})->whereNumber('id');
 
 //Route::get('/test4/{name?}', function ($name=null) {
-    //return ('the name is:' . $name);
+  //  return ('the name is:' . $name);
 //})->whereAlpha('name');
 
 //Route::get('/test5/{id?}/{name}', function ($id=0,$name) {
-  //  return ('the id is:' . $id . "" .'the name is:' . $name);
+   // return ('the id is:' . $id . "" .'the name is:' . $name);
 //})->where(['id'=> '[0-9]+' , 'name'=>'[a-zA-Z]+']);
 
 //Route::get('/product/{category}', function ($cat) {
-   // return ('the name is:' . $cat);
+  //  return ('the name is:' . $cat);
 //})->whereIn('category',['pc','Lab']);
+
+//Route::get('test50', function () {
+    //  return view('test');
+  //});
+
+  //Route::get('image', function () {
+  // return view('image');
 //});
 
-Route::get('test50', function () {
-      return view('test');
-  });
+//Route::post('imageUplod',[ExampleController::class,'upload'])->name('imageUplod');
 
-  Route::get('image', function () {
-   return view('image');
-});
+//Route::get('testHome', function () {
+ //  return view('testHome');
+//});
 
-Route::post('imageUplod',[ExampleController::class,'upload'])->name('imageUplod');
-
-Route::get('testHome', function () {
-   return view('testHome');
-});
-
-Route::get('404', function () {
-   return view('404');
-});
+//Route::get('404', function () {
+  // return view('404');
+//});
  
-Route::get('contact', function () {
-   return view('contact');
-});
+//Route::get('contact', function () {
+  // return view('contact');
+//});
 
 //routes for post table
-Route::get('createPost',[PostController::class,'create'])->name('createPost');
-Route::post('storePost',[PostController::class,'store'])->name('storePost');
-Route::get("showPost/{id}", [PostController::class,"show"])->name('showPost');
-Route::get('updatePost/{id}',[PostController::class,'edit']);
-Route::get('deletePost/{id}',[PostController::class,'destroy']);
-Route::get("trashedPost", [PostController::class,"trashed"])->name('trashedPost');
-Route::get("restorePost/{id}", [PostController::class,"restore"])->name('restorePost');
-Route::get('forceDeletePost', [PostController::class,'forceDelete'])->name('forceDeletePost');
-Route::get('posts',[PostController::class,'index'])->name('posts');
-Route::put('updatee/{id}',[PostController::class,'update'])->name('Update');
-Route::get("showPost/{id}",[CarController::class,'show'])->name('showPost');
+//Route::get('createPost',[PostController::class,'create'])->name('createPost');
+//Route::post('storePost',[PostController::class,'store'])->name('storePost');
+//Route::get("showPost/{id}", [PostController::class,"show"])->name('showPost');
+//Route::get('updatePost/{id}',[PostController::class,'edit']);
+//Route::get('deletePost/{id}',[PostController::class,'destroy']);
+//Route::get("trashedPost", [PostController::class,"trashed"])->name('trashedPost');
+//Route::get("restorePost/{id}", [PostController::class,"restore"])->name('restorePost');
+//Route::get('forceDeletePost', [PostController::class,'forceDelete'])->name('forceDeletePost');
+//Route::get('posts',[PostController::class,'index'])->name('posts');
+//Route::put('updatee/{id}',[PostController::class,'update'])->name('Update');
+//Route::get("showPost/{id}",[CarController::class,'show'])->name('showPost');
 //routes for car table
-Route::get('createCar',[CarController::class,'create'])->name('createCar');
+Route::get('createCar',[CarController::class,'create'])->middleware('verified')->name('createCar');
 Route::get('cars',[CarController::class,'index'])->name('cars');
 Route::get('updateCar/{id}',[CarController::class,'edit']);
 Route::get('deleteCar/{id}',[CarController::class,'destroy']);
@@ -137,3 +136,6 @@ Route::get('restoreCar/{id}', [CarController::class,'restore'])->name('restoreCa
 Route::put('update/{id}',[CarController::class,'update'])->name('update');
 Route::post('storeCar',[CarController::class,'store'])->name('storeCar');
 Route::get("showCar/{id}",[CarController::class,'show'])->name('showCar');
+Auth::routes(['verify'=>true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
