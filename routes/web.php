@@ -32,7 +32,8 @@ Route::get('/', function () {
  //  return 'you are logged in';
 //})->name('logged');
 
-//Route::get('controll',[ExampleController::class,'sh']);
+//Route::get('test20',[ExampleController::class,'createSession']);
+Route::post('contact_mail',[ExampleController::class,'contact_mail_send']);
 //Route::post('control',[ExampleController::class,'show']
 //)->name('logged');
 
