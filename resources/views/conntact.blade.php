@@ -16,7 +16,7 @@
 								<p>If you have any questions please fell free to contact with us.</p>
 								<!-- Form -->
 								<form class="form" method="post" action="{{url('contact_mail')}}">
-                                {{ csrf_field()}}
+                                @csrf
 									<div class="row">
 										<div class="col-lg-6">
 											<div class="form-group">

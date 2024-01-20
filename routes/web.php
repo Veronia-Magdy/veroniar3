@@ -33,7 +33,7 @@ Route::get('/', function () {
 //})->name('logged');
 
 //Route::get('test20',[ExampleController::class,'createSession']);
-Route::post('contact_mail',[ExampleController::class,'contact_mail_send']);
+Route::post('contact_mail',[ExampleController::class,'contact_mail_send'])->name('contact_mail');
 //Route::post('control',[ExampleController::class,'show']
 //)->name('logged');
 
@@ -43,10 +43,11 @@ Route::post('contact_mail',[ExampleController::class,'contact_mail_send']);
   //   return ('about');
  //});
 
- //Route::get('contact us', function () {
- //   return ('contact us');
-//});
+ Route::get('contact', function () {
+   return view('conntact');
+});
 
+Route::get('guards',[ExampleController::class,'guards']);
 //Route::get('/blog/{category}', function ($cat) {
    //  return ('the Blog is:' . $cat);
  //})->whereIn('category',['science','sports','math','medical']);
@@ -127,6 +128,11 @@ Route::post('contact_mail',[ExampleController::class,'contact_mail_send']);
 //Route::put('updatee/{id}',[PostController::class,'update'])->name('Update');
 //Route::get("showPost/{id}",[CarController::class,'show'])->name('showPost');
 //routes for car table
+Route::group(
+   [
+       'prefix' => LaravelLocalization::setLocale(),
+       'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+   ], function(){
 Route::get('createCar',[CarController::class,'create'])->middleware('verified')->name('createCar');
 Route::get('cars',[CarController::class,'index'])->name('cars');
 Route::get('updateCar/{id}',[CarController::class,'edit']);
@@ -140,3 +146,5 @@ Route::get("showCar/{id}",[CarController::class,'show'])->name('showCar');
 Auth::routes(['verify'=>true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+   });

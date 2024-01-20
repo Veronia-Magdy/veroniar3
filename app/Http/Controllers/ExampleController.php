@@ -12,6 +12,12 @@ class ExampleController extends Controller
     {
       return view('login');
     }
+
+    public function guards( )
+    {
+      return view('guards');
+    }
+
     public function show(Request $request)
     {
         return $request->all();
@@ -28,9 +34,10 @@ class ExampleController extends Controller
     session()->put('testSession' , 'my first session value');
     return 'session created' . session('testSession');
   }
+
   public function contact_mail_send(Request $request)
   {
     Mail::to('vm@gmail.com')->send(new ContactMail($request));
-    return redirect('conntact') ;
+    return redirect('contact_mail') ;
   }
 }
